@@ -48,7 +48,7 @@ export default class LoginForm extends React.Component {
     }
 
     async tryLogin(){
-        let response = await fetch("http://localhost:3000/auth/login", {
+        let response = await fetch(`${this.props.host}/auth/login`, {
             method:"POST",
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify({username:this.state.login, password:this.state.password})
