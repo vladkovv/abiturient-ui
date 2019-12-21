@@ -31,7 +31,7 @@ export default class MyButton extends React.Component{
         return (<Navbar bg="light" expand="lg">
             <Navbar.Brand href="#home"
                 onClick={this.handleHomeLink}>
-                    Регистрация Абитуриентов
+                    Регистрация<br/>Абитуриентов
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
