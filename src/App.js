@@ -8,7 +8,11 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.props = props;
-    this.state = {page:'home'};
+    this.state = {
+      page:'home',
+      //host:'http://localhost:3000',
+      host: 'http://35.228.127.63:3000',
+    };
     this.handlePageChange = this.handlePageChange.bind(this);
   }
 
@@ -21,9 +25,11 @@ class App extends React.Component {
       <div className="App">
         <MainMenu 
           page={this.state.page}
-          handlePageChange={this.handlePageChange} />
+          handlePageChange={this.handlePageChange}
+          host={this.state.host} />
         <PageBody
-          page={this.state.page} >
+          page={this.state.page}
+          host={this.state.host} >
         </PageBody>
       </div>
     );
