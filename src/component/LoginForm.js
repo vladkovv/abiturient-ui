@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import React from "react";
 import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
+import Card from "react-bootstrap/Card"
+import Container from "react-bootstrap/Container"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
 
 function Message(props){
     let type = "primary";
@@ -20,7 +20,7 @@ function Message(props){
 
     if(message){
         return (
-            <Alert variant={type}>
+            <Alert variant={type} className={props.className}>
                 {message}
             </Alert>
         );
@@ -47,7 +47,8 @@ export default class LoginForm extends React.Component {
         this.setState({password: event.target.value});
     }
 
-    async tryLogin(){
+    async tryLogin(e){
+        e.preventDefault();
         let response = await fetch(`${this.props.host}/auth/login`, {
             method:"POST",
             headers:{"Content-Type":"application/json"},
@@ -65,24 +66,34 @@ export default class LoginForm extends React.Component {
 
     render() {
         return (
-            <Form>
-                <Form.Group controlId="formLogin">
-                    <Form.Label>Логин</Form.Label>
-                    <Form.Control type="text" placeholder="Логин" onChange={this.loginChange}/>
-                    <Form.Text className="text-muted">
-                        Введите логин для входа
-                    </Form.Text>
-                </Form.Group>
+            <Container>
+                <Row className="justify-content-md-center">
+                    <Col lg="6">
+                        <Card className="m-4">
+                            <Card.Body>
+                                <Form>
+                                    <Form.Group controlId="formLogin">
+                                        <Form.Label>Логин</Form.Label>
+                                        <Form.Control type="text" placeholder="Логин" onChange={this.loginChange}/>
+                                        <Form.Text className="text-muted">
+                                            Введите логин для входа
+                                        </Form.Text>
+                                    </Form.Group>
 
-                <Form.Group controlId="formPassword">
-                    <Form.Label>Пароль</Form.Label>
-                    <Form.Control type="password" placeholder="Password" onChange={this.passwordChange}/>
-                </Form.Group>
-                <Button variant="primary" type="submit" onClick={this.tryLogin}>
-                    Войти
-                </Button>
-                <Message message={this.state.message} error={this.state.error}/>
-            </Form>
+                                    <Form.Group controlId="formPassword">
+                                        <Form.Label>Пароль</Form.Label>
+                                        <Form.Control type="password" placeholder="Password" onChange={this.passwordChange}/>
+                                    </Form.Group>
+                                    <Button variant="primary" type="submit" onClick={this.tryLogin}>
+                                        Войти
+                                    </Button>                
+                                    <Message message={this.state.message} error={this.state.error} className="mt-3"/>
+                                </Form>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 }
